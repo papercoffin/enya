@@ -36,11 +36,13 @@ client.on('message', message =>
         message.delete();
         client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
         {
-            quoteEmbed.setColor('#ffe697');
+            quoteEmbed.setColor('#ffd885');
             quoteEmbed.setAuthor(nMessage.author.tag, nMessage.author.displayAvatarURL({ format: 'png', dynamic: true }));
             quoteEmbed.setDescription(nMessage.content + '\n[[Jump to Message]](' + message.content + ')');
             quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0]));
-            quoteEmbed.addField(nMessage.content, '[Jump to message](' + message.content + ')')
+            quoteEmbed.setFooter(`Message ID: ${nMessage.id} • ${nMessage.createdTimestamp}`);
+            
+            // Sends the embed.
             message.channel.send(quoteEmbed);
         });
     }
