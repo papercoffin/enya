@@ -2,7 +2,7 @@ module.exports =
 {
 	name: 'invite',
 	description: 'Invite this bot to other servers!',
-    execute() 
+    execute(message) 
     {
         const invite = new Discord.MessageEmbed()
         {
@@ -10,5 +10,6 @@ module.exports =
             invite.setTitle("Invite Link");
             invite.setUrl("https://discord.com/api/oauth2/authorize?client_id=805042259035815956&permissions=2081287414&scope=bot");
         }
+        message.channel.send(invite);
 	},
 };
