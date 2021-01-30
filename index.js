@@ -26,7 +26,7 @@ client.on('message', message =>
     // Pings the bot to check for activity.
     if (message.content === `${prefix}ping`) 
     {
-		message.channel.send('Pong.');
+		message.channel.send('Pong!');
 	}
 
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
@@ -36,6 +36,7 @@ client.on('message', message =>
         message.delete();
         client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
         {
+            quoteEmbed.setTitle(message.author.displayAvatarURL(), message.author.username);
             quoteEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')');
             quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content));
             quoteEmbed.setColor('#ffe697');
