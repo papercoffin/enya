@@ -1,10 +1,10 @@
 //Variables
-var ownerID = "YOURID"
-const prefix = 'PREFIX'
+var ownerID = "655475175185448985"
+const prefix = '!'
 
 //Packages
 const Discord = require('discord.js')
-const client = new Discord.Client({presence: {status: 'online', activity: {name: 'GAME'}}, disableMentions: 'everyone'})
+const client = new Discord.Client({presence: {status: 'online', activity: {name: '!help'}}, disableMentions: 'everyone'})
 const http = require('http')
 const express = require('express')
 const app = express()
@@ -13,7 +13,7 @@ const app = express()
 var port = (process.env.PORT || 0)
 app.get('/', (req, res) => res.sendStatus(200))
 app.listen(port, () => console.log('Listening at port ' + port))
-setInterval(() => {http.get("SITE_URL")}, 280000)
+setInterval(() => {http.get("https://enya-bot.herokuapp.com/SITE_URL")}, 280000)
 
 //Ready
 client.once('ready', () => {console.log('---')})
