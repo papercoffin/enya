@@ -14,7 +14,7 @@ const app = express()
 var port = (process.env.PORT || 0)
 app.get('/', (req, res) => res.sendStatus(200))
 app.listen(port, () => console.log('Listening at port ' + port))
-setInterval(() => {http.get("https://enya-bot.herokuapp.com/SITE_URL")}, 280000)
+setInterval(() => {http.get("https://enya-bot.herokuapp.com/")}, 280000)
 
 // Retrieves command files.
 
@@ -29,14 +29,31 @@ for (const file of commandFiles)
 	client.commands.set(command.name, command);
 }
 
-
 // Ready.
 client.once('ready', () => {console.log('---')})
 
 // Message Event Listener.
 client.on('message', message => 
 {
-    // Responses using if/else statements.
+    // Command detector.
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+
+    // Checks if there is a command within the commands folder named the given input.
+    if (!client.commands.has(command)) return;
+
+    // If there is, tries to execute it.
+    try 
+    {
+        client.commands.get(command).execute(message, args);
+    } 
+    catch (error) 
+    {
+	    console.error(error);
+        message.reply('There was an error trying to execute that command!');
+    }
 
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord.com/channels/")) 
