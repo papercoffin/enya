@@ -32,14 +32,14 @@ client.on('message', message =>
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord")) 
     {
-        var parts = message.content.split('/'), artEmbed = new Discord.MessageEmbed();
+        var parts = message.content.split('/'), quoteEmbed = new Discord.MessageEmbed();
         message.delete();
         client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
         {
-            artEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')')
-            artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
-            artEmbed.setColor(ffe697)
-            message.channel.send(artEmbed)
+            quoteEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')');
+            quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content));
+            quoteEmbed.setColor(ffe697);
+            message.channel.send(quoteEmbed);
         });
     }
 });
