@@ -40,7 +40,7 @@ client.on('message', message =>
             quoteEmbed.setAuthor(nMessage.author.tag, nMessage.author.displayAvatarURL({ format: 'png', dynamic: true }));
             quoteEmbed.setDescription(nMessage.content + '\n[[Jump to Message]](' + message.content + ')');
             quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0]));
-            quoteEmbed.setFooter(`ID: ${nMessage.id} • ${nMessage.createdAt}`);
+            quoteEmbed.setFooter(`ID: ${nMessage.id}`);
             quoteEmbed.setTimestamp(nMessage.createdAt);
 
             // Sends the embed.
