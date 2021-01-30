@@ -22,6 +22,12 @@ client.once('ready', () => {console.log('---')})
 client.on('message', message => 
 {
     // Responses using if/else statements.
+    
+    // Pings the bot to check for activity.
+    if (message.content === `${prefix}ping`) 
+    {
+		message.channel.send('Pong.');
+	}
 
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord")) 
@@ -32,7 +38,7 @@ client.on('message', message =>
         {
             artEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')')
             artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
-            artEmbed.setColor(v.corrColor)
+            artEmbed.setColor(ffe697)
             message.channel.send(artEmbed)
         });
     }
