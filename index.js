@@ -36,10 +36,11 @@ client.on('message', message =>
         message.delete();
         client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
         {
-            quoteEmbed.setTitle(message.author.displayAvatarURL(), message.author.username);
-            quoteEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')');
-            quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content));
             quoteEmbed.setColor('#ffe697');
+            quoteEmbed.setAuthor(message.author);
+            quoteEmbed.setDescription(message.content);
+            
+            quoteEmbed.setFooter('[Jump to Message](' + message.content + ')');
             message.channel.send(quoteEmbed);
         });
     }
