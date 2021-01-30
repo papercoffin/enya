@@ -1,55 +1,42 @@
-//Variables
+// Variables.
 var ownerID = "655475175185448985"
 const prefix = '!'
 
-//Packages
+// Packages.
 const Discord = require('discord.js')
 const client = new Discord.Client({presence: {status: 'online', activity: {name: '!help'}}, disableMentions: 'everyone'})
 const http = require('http')
 const express = require('express')
 const app = express()
 
-//Page
+// Page.
 var port = (process.env.PORT || 0)
 app.get('/', (req, res) => res.sendStatus(200))
 app.listen(port, () => console.log('Listening at port ' + port))
 setInterval(() => {http.get("https://enya-bot.herokuapp.com/SITE_URL")}, 280000)
 
-//Ready
+// Ready.
 client.once('ready', () => {console.log('---')})
 
-//Message Event Listener
-client.on('message', message => {
+// Message Event Listener.
+client.on('message', message => 
+{
+    // Responses using if/else statements.
 
-  try {
+    // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
+    if (message.content.startsWith("https://discord")) 
+    {
+        var parts = message.content.split('/'), artEmbed = new Discord.MessageEmbed();
+        message.delete();
+        client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
+        {
+            artEmbed.addField(nMessage.content, '[Jump to Message](' + message.content + ')')
+            artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
+            artEmbed.setColor(v.corrColor)
+            message.channel.send(artEmbed)
+        });
+    }
+});
 
-  //Anything past this line will not happen if the message is not sent in a guild (server)
-  if (!message.guild) return;
-
-  //Anything past this line will not happen if the message is not sent by an user account.
-  if (message.author.bot || message.system) return;
-
-  //Anything past this line will not happen if the message has no prefix.
-  if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-  //Arguments
-  var msgCon = message.content.toLowerCase()
-  var args = message.content.split(' ')
-  var argresult = args.slice(1).join(' ')
-
-  //Message Attachments
-  if (message.attachments.size) {var msgAtt = Array.from(message.attachments.values(), x => x.url)}
-
-  //Classic say command
-  if (msgCon.startsWith(prefix + 'say') && (argresult ||  msgAtt)) {
-    message.channel.send(argresult, {files: msgAtt})
-    message.delete()}
-
-  //Evaluate command
-  if (msgCon.startsWith(prefix + 'eval ') && message.author.id === ownerID) {
-    eval(argresult)}
-
-  } catch(error) {console.log('Trigger: ' + message.content + ' | ' + error)}})
-
-//Token
+// Token.
 client.login(process.env.TOKEN)
