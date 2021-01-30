@@ -38,9 +38,8 @@ client.on('message', message =>
         {
             quoteEmbed.setColor('#ffe697');
             quoteEmbed.setAuthor(nMessage.author.tag, nMessage.author.iconURL);
-            quoteEmbed.setDescription(nMessage.content);
-            quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0]) || nMessage.content);
-            quoteEmbed.addField('[Jump to Message](' + message.content + ')');
+            quoteEmbed.setDescription(nMessage.content + '\n[Jump to Message](' + message.content + ')');
+            quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0]));
             message.channel.send(quoteEmbed);
         });
     }
