@@ -3,6 +3,7 @@ var ownerID = "655475175185448985"
 const prefix = '!'
 
 // Packages.
+const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client({presence: {status: 'online', activity: {name: '!help'}}, disableMentions: 'everyone'})
 const http = require('http')
@@ -15,6 +16,20 @@ app.get('/', (req, res) => res.sendStatus(200))
 app.listen(port, () => console.log('Listening at port ' + port))
 setInterval(() => {http.get("https://enya-bot.herokuapp.com/SITE_URL")}, 280000)
 
+// Retrieves command files.
+
+client.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) 
+{
+	const command = require(`./commands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
+}
+
+
 // Ready.
 client.once('ready', () => {console.log('---')})
 
@@ -22,12 +37,6 @@ client.once('ready', () => {console.log('---')})
 client.on('message', message => 
 {
     // Responses using if/else statements.
-    
-    // Pings the bot to check for activity.
-    if (message.content === `${prefix}ping`) 
-    {
-		message.channel.send('Pong!');
-	}
 
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord.com/channels/")) 
