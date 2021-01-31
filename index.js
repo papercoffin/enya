@@ -36,6 +36,8 @@ client.once('ready', () => {console.log('---')})
 // Message Event Listener.
 client.on('message', message => 
 {
+    var embed = Discord.MessageEmbed();
+    
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord.com/channels/")) 
     {
@@ -60,7 +62,7 @@ client.on('message', message =>
 
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
-    
+
     // Checks if there is a command within the commands folder named the given input.
     if (!client.commands.has(command)) return;
 
@@ -72,7 +74,7 @@ client.on('message', message =>
     catch (error) 
     {
         console.error(error);
-        message.reply('There was an error trying to execute that command!');
+        message.channel.send('There was an error trying to execute that command!');
     }
 });
 
