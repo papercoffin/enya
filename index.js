@@ -1,6 +1,7 @@
 // Variables.
 var ownerID = "655475175185448985"
 const prefix = '!'
+const embedColor = "#ffd885"
 
 // Packages.
 const fs = require('fs');
@@ -62,14 +63,14 @@ client.on('message', message =>
         message.delete();
         client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage =>
         {
-            quoteEmbed.setColor('#ffd885');
+            quoteEmbed.setColor(embedColor);
             quoteEmbed.setAuthor(nMessage.author.tag, nMessage.author.displayAvatarURL({ format: 'png', dynamic: true }));
             quoteEmbed.setDescription(nMessage.content + '\n[[Jump to Message]](' + message.content + ')');
             quoteEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0]));
             quoteEmbed.setFooter(`ID: ${nMessage.id}`);
             quoteEmbed.setTimestamp(nMessage.createdAt);
 
-            // Sends the embed.
+            // Sends the resulting embed.
             message.channel.send(quoteEmbed);
         });
     }
