@@ -5,7 +5,7 @@ const prefix = '!';
 // Packages.
 const fs = require('fs');
 const Discord = require('discord.js')
-const client = new Discord.Client({presence: {status: 'online', activity: {name: '!help'}}, disableMentions: 'everyone'})
+const client = new Discord.Client({presence: {status: 'online', activity: {name: 'prefix:!'}}, disableMentions: 'everyone'})
 const http = require('http')
 const express = require('express')
 const app = express()
