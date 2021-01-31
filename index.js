@@ -2,7 +2,6 @@
 var ownerID = "655475175185448985";
 const prefix = '!';
 const embedColor = "#ffd885";
-var embed = new Discord.MessageEmbed();
 
 // Packages.
 const fs = require('fs');
@@ -42,6 +41,7 @@ client.on('message', message =>
 
     const args = message.content.slice(prefix.length).trim().split(' ');
     const command = args.shift().toLowerCase();
+    var embed = new Discord.MessageEmbed();
 
     // Checks if there is a command within the commands folder named the given input.
     if (!client.commands.has(command)) return;
@@ -79,3 +79,4 @@ client.on('message', message =>
 
 // Token.
 client.login(process.env.TOKEN)
+
