@@ -60,6 +60,20 @@ client.on('message', message =>
             message.channel.send(quoteEmbed);
         });
     }
+    
+    // Checks if there is a command within the commands folder named the given input.
+    if (!client.commands.has(command)) return;
+
+    // If there is, tries to execute it.
+    try 
+    {
+        client.commands.get(command).execute(message, args);
+    } 
+    catch (error) 
+    {
+        console.error(error);
+        message.reply('There was an error trying to execute that command!');
+    }
 });
 
 // Token.
