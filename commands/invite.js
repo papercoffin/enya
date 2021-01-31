@@ -4,18 +4,15 @@ module.exports =
     description: 'Invite this bot to other servers!',
     aliases: 'inv',
     
-    // Methods that are executed upon calling this command.
-    execute(message) 
+    // Parameters passed into the methods being executed.
+    execute(message, embed) 
     {
-        // Creates a MessageEmbed object named 'invite'.
-        const invite = new Discord.MessageEmbed();
-
         // Sets variables in the embed.
-        invite.setColor(embedColor);
-        invite.setTitle("Invite Link");
-        invite.setUrl("https://discord.com/api/oauth2/authorize?client_id=805042259035815956&permissions=2081287414&scope=bot");
+        embed.setColor(embedColor);
+        embed.setTitle("Invite Link");
+        embed.setUrl("https://discord.com/api/oauth2/authorize?client_id=805042259035815956&permissions=2081287414&scope=bot");
 
         // Sends the resulting embed.
-        message.channel.send(invite);
+        message.channel.send(embed);
 	},
 };

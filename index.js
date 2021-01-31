@@ -1,7 +1,8 @@
 // Variables.
-var ownerID = "655475175185448985"
-const prefix = '!'
-const embedColor = "#ffd885"
+var ownerID = "655475175185448985";
+const prefix = '!';
+const embedColor = "#ffd885";
+var embed = new Discord.MessageEmbed();
 
 // Packages.
 const fs = require('fs');
