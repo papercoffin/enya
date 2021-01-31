@@ -36,12 +36,6 @@ client.once('ready', () => {console.log('---')})
 // Message Event Listener.
 client.on('message', message => 
 {
-    // Command detector.
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const command = args.shift().toLowerCase();
-
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord.com/channels/")) 
     {
@@ -60,6 +54,12 @@ client.on('message', message =>
             message.channel.send(quoteEmbed);
         });
     }
+
+    // Command detector.
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
     
     // Checks if there is a command within the commands folder named the given input.
     if (!client.commands.has(command)) return;
