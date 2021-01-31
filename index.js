@@ -1,7 +1,6 @@
 // Variables.
 var ownerID = "655475175185448985";
 const prefix = '!';
-const embedColor = "#ffd885";
 
 // Packages.
 const fs = require('fs');
@@ -37,7 +36,8 @@ client.once('ready', () => {console.log('---')})
 client.on('message', message => 
 {
     var embed = Discord.MessageEmbed();
-    
+    const embedColor = "#ffd885";
+
     // When a user sends and pastes a link to a Discord message, the bot will display it in an embed.
     if (message.content.startsWith("https://discord.com/channels/")) 
     {
